@@ -1,0 +1,70 @@
+@use 'variables' as *;
+
+.carousel {
+    // Default desktop styles
+    position: static;
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+    z-index: auto;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    max-width: 1200px; // max width container
+    margin-left: auto; // center horizontally
+    margin-right: auto;
+
+    &.hidden {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    @media (min-width: $breakpoint-md) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .keen-slider__slide {
+            width: auto; // shrink to content width
+            display: flex;
+            justify-content: center;
+        }
+
+        .carousel-image {
+            height: 650px;
+            width: auto;
+            max-width: 100%; // prevent overflow
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+    &--full-screen-mobile {
+        @media (max-width: $breakpoint-md) {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 1 !important;
+            margin-bottom: 0;
+            background: rgba(255, 0, 0, 0.1); // optional debug background
+
+            .keen-slider__slide,
+            .carousel-image {
+                height: 100vh !important;
+                min-height: 100vh;
+            }
+        }
+    }
+}
+
+.carousel-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.keen-slider__slide {
+    width: 100%;
+}

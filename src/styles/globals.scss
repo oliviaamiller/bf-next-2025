@@ -1,0 +1,73 @@
+@use 'variables' as *;
+
+// ===== Base Styles =====
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: $font;
+    background-color: $background-color;
+    color: $grey;
+    line-height: 1.6;
+    font-size: 14px;
+    overflow-x: hidden;
+}
+
+body,
+html,
+#__next {
+    height: 100%;
+    overflow: visible !important;
+    position: relative;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+ul,
+ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.page-wrapper {
+    padding-left: 16px;
+    padding-right: 16px;
+    overflow-x: hidden;
+        max-width: 100vw;
+        /* restrict width */
+
+    @media (min-width: $breakpoint-md) {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+        padding-left: 64px;
+        padding-right: 64px;
+    }
+}
