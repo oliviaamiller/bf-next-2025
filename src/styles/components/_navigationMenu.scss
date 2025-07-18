@@ -1,6 +1,8 @@
 @use 'variables' as *;
 
 .nav-wrapper {
+    position: relative;
+
     .nav-icon {
         width: 26px;
         height: 26px;
@@ -12,9 +14,14 @@
 
         &.open {
             background-color: $black;
-            border:none;
+            border: none;
+            position: relative;
+            z-index: 1001;
         }
 
+        @media (min-width: $breakpoint-md) {
+            display: none;
+        }
     }
 
     .menu {
@@ -24,22 +31,34 @@
         gap: 1rem;
         font-weight: 700;
         font-size: 1rem;
-    }
 
-    .open {
-        display: flex;
-    }
-
-    @media (min-width: $breakpoint-md) {
-        .nav-icon {
-            display: none;
+        &.open {
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1000;
+            background-color: $background-color;
+            padding: 2rem;
         }
 
-        .menu {
+        @media (min-width: $breakpoint-md) {
             display: flex;
             flex-direction: row;
-            align-items: center;
             gap: 1.5rem;
+            position: static;
+            width: auto;
+            height: auto;
+            background: none;
+
+            &.open {
+                position: static;
+                width: auto;
+                height: auto;
+            }
         }
     }
 }
