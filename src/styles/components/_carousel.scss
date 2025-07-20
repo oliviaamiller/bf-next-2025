@@ -1,7 +1,6 @@
 @use 'variables' as *;
 
 .carousel {
-    // Default desktop styles
     position: static;
     width: 100%;
     height: auto;
@@ -9,8 +8,8 @@
     z-index: auto;
     opacity: 1;
     transition: opacity 0.3s ease;
-    max-width: 1200px; // max width container
-    margin-left: auto; // center horizontally
+    max-width: 1200px;
+    margin-left: auto;
     margin-right: auto;
 
     &.hidden {
@@ -20,11 +19,10 @@
 
     @media (min-width: $breakpoint-md) {
         display: flex;
-        justify-content: center;
         align-items: center;
 
         .keen-slider__slide {
-            width: auto; // shrink to content width
+            width: 100%;
             display: flex;
             justify-content: center;
         }
@@ -32,7 +30,7 @@
         .carousel-image {
             height: 650px;
             width: auto;
-            max-width: 100%; // prevent overflow
+            max-width: 100%;
             object-fit: cover;
             display: block;
         }
@@ -47,7 +45,7 @@
             height: 100vh !important;
             z-index: 1 !important;
             margin-bottom: 0;
-            background: rgba(255, 0, 0, 0.1); // optional debug background
+            background: rgba(255, 0, 0, 0.1);
 
             .keen-slider__slide,
             .carousel-image {
@@ -67,4 +65,41 @@
 
 .keen-slider__slide {
     width: 100%;
+}
+
+.carousel-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
+
+    button.arrow {
+        background: none;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+        color: #333;
+        padding: 0 0.5rem;
+        user-select: none;
+    }
+
+    .dots {
+        display: flex;
+        gap: 0.5rem;
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+
+            &.active {
+                background: #333;
+            }
+        }
+    }
 }

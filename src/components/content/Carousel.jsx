@@ -2,7 +2,7 @@
 
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "@/styles/components/_carousel.scss";
 
 export default function Carousel({
@@ -12,11 +12,18 @@ export default function Carousel({
   fullScreenOnMobile = false,
   className = "",
 }) {
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
-
-  const [sliderRef] = useKeenSlider(
+  const [sliderRef, slider] = useKeenSlider(
     {
+      initial: 0,
+      slideChanged(slider) {
+        setCurrentSlide(slider.track.details.rel);
+      },
       loop: true,
+      created(sliderInstance) {
+        setLoaded(true);
+      },
     },
     autoplay
       ? [
@@ -37,7 +44,6 @@ export default function Carousel({
             }
 
             slider.on("created", () => {
-              setLoaded(true);
               slider.container.addEventListener("mouseover", () => {
                 mouseOver = true;
                 clearNextTimeout();
@@ -57,33 +63,70 @@ export default function Carousel({
       : []
   );
 
+  useEffect(() => {
+    console.log("Carousel loaded:", loaded);
+    console.log("Slider track details:", slider?.current?.track?.details);
+  }, [loaded, slider]);
+
   if (!images || images.length === 0) return null;
 
   return (
-    <div
-      ref={sliderRef}
-      className={`keen-slider carousel ${
-        fullScreenOnMobile ? "carousel--full-screen-mobile" : ""
-      } ${className} ${loaded ? "" : "hidden"}`}
-    >
-      {images.map((img) => {
-        const { url, fileName } = img.fields.file;
-        return (
-          <div key={img.sys.id} className="keen-slider__slide">
-            <img
-              src={`https:${url}`}
-              alt={img.fields.title || fileName}
-              className="carousel-image"
-            />
-          </div>
-        );
-      })}
+    <section>
+      <div
+        ref={sliderRef}
+        className={`keen-slider carousel ${
+          fullScreenOnMobile ? "carousel--full-screen-mobile" : ""
+        } ${className} ${loaded ? "" : "hidden"}`}
+      >
+        {images.map((img) => {
+          const { url, fileName } = img.fields.file;
+          return (
+            <div key={img.sys.id} className="keen-slider__slide">
+              <img
+                src={`https:${url}`}
+                alt={img.fields.title || fileName}
+                className="carousel-image"
+              />
+            </div>
+          );
+        })}
+      </div>
 
-      {showPagination && (
+      {showPagination && slider?.current?.track?.details && (
         <div className="carousel-pagination">
-          {/* add dots/buttons here if desired */}
+          <button
+            className="arrow"
+            onClick={() => slider.current.prev()}
+            aria-label="Previous slide"
+          >
+            ‹
+          </button>
+
+          <div className="dots">
+            {[...Array(slider.current.track.details.slides.length).keys()].map(
+              (idx) => {
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      slider.current?.moveToIdx(idx);
+                    }}
+                    className={"dot" + (currentSlide === idx ? " active" : "")}
+                  ></button>
+                );
+              }
+            )}
+          </div>
+
+          <button
+            className="arrow"
+            onClick={() => slider.current.next()}
+            aria-label="Next slide"
+          >
+            ›
+          </button>
         </div>
       )}
-    </div>
+    </section>
   );
 }
