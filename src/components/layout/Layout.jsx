@@ -1,4 +1,3 @@
-import NavigationMenu from "../navigation/NavigationMenu";
 import Header from "./Header";
 
 export default function Layout({ children }) {

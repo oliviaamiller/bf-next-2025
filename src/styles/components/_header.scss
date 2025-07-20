@@ -1,9 +1,21 @@
 @use 'variables' as *;
 
 header {
-position: relative;
-margin: 0 auto;
-z-index: 5;
+    position: relative;
+    margin: 0 auto;
+    // z-index: 5;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    @media (min-width: $breakpoint-md) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+        padding-left: 0;
+        padding-right: 0;
+    }
 
     .header-wrapper {
         display: flex;
@@ -12,21 +24,15 @@ z-index: 5;
         align-items: baseline;
         padding: 30px 0;
 
+        
+
         .logo img {
             width: 19.375rem;
-            display: none;
-            }
+            display: block; 
+        }
 
         @media (min-width: $breakpoint-md) {
             align-items: flex-end;
-
-            .logo img {
-                width: 19.375rem;
-                display: block;
-            }
-            
         }
-
-    
     }
 }
