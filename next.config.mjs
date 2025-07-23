@@ -15,7 +15,6 @@ const nextConfig = {
   images: {
     domains: ["images.ctfassets.net"],
   },
-  output: "standalone",
 };
 
 export default nextConfig;
