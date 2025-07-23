@@ -79,12 +79,12 @@ export default function Carousel({
         } ${className} ${loaded ? "" : "hidden"}`}
       >
         {images.map((img) => {
-          const { url, fileName } = img.fields.file;
+          const { url } = img.fields.file;
           return (
             <div key={img.sys.id} className="keen-slider__slide">
               <img
                 src={`https:${url}`}
-                alt={img.fields.title || fileName}
+                alt={img.fields.title}
                 className="carousel-image"
               />
             </div>
@@ -94,37 +94,39 @@ export default function Carousel({
 
       {showPagination && slider?.current?.track?.details && (
         <div className="carousel-pagination">
-          <button
-            className="arrow"
-            onClick={() => slider.current.prev()}
-            aria-label="Previous slide"
-          >
-            ‹
-          </button>
+          {images[currentSlide]?.fields?.description && (
+            <div className="slide-description">
+              {images[currentSlide].fields.description}
+            </div>
+          )}
 
-          <div className="dots">
-            {[...Array(slider.current.track.details.slides.length).keys()].map(
-              (idx) => {
-                return (
-                  <button
-                    key={idx}
-                    onClick={() => {
-                      slider.current?.moveToIdx(idx);
-                    }}
-                    className={"dot" + (currentSlide === idx ? " active" : "")}
-                  ></button>
-                );
-              }
-            )}
+          <div className="pagination-wrapper">
+            <button
+              className="arrow"
+              onClick={() => slider.current.prev()}
+              aria-label="Previous slide"
+            >
+              <img src="/assets/svg/chevron_left.svg" alt="Previous" />
+            </button>
+            <div className="dots">
+              {[
+                ...Array(slider.current.track.details.slides.length).keys(),
+              ].map((idx) => (
+                <button
+                  key={idx}
+                  onClick={() => slider.current?.moveToIdx(idx)}
+                  className={"dot" + (currentSlide === idx ? " active" : "")}
+                />
+              ))}
+            </div>
+            <button
+              className="arrow"
+              onClick={() => slider.current.next()}
+              aria-label="Next slide"
+            >
+              <img src="/assets/svg/chevron_right.svg" alt="Next" />
+            </button>
           </div>
-
-          <button
-            className="arrow"
-            onClick={() => slider.current.next()}
-            aria-label="Next slide"
-          >
-            ›
-          </button>
         </div>
       )}
     </section>

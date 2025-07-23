@@ -2,6 +2,7 @@ import { getProjectBySlug, getAllProjects } from "@/lib/contentful";
 import "@/styles/pages/_project.scss";
 import { safeSlug } from "@/lib/slugify";
 import Carousel from "@/components/content/Carousel";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
 export async function generateStaticParams() {
   const projects = await getAllProjects();
@@ -21,12 +22,23 @@ export default async function ProjectPage(props) {
 
   return (
     <section className="project-wrapper">
-      <Carousel
-        images={project.fields.images}
-        autoplay={false}
-        fullScreenOnMobile={false}
-        showPagination={true}
-      />
+      <div className="carousel-container">
+        <Carousel
+          images={project.fields.images}
+          autoplay={false}
+          fullScreenOnMobile={false}
+          showPagination={true}
+        />
+      </div>
+      <div className="project-copy">
+        <p className="name">{project.fields.name}</p>
+        <div
+          className="rich-text"
+          dangerouslySetInnerHTML={{
+            __html: documentToHtmlString(project.fields.description),
+          }}
+        />
+      </div>
     </section>
   );
 }

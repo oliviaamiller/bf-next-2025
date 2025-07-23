@@ -3,37 +3,15 @@
 .carousel {
     position: static;
     width: 100%;
+    max-width: 1200px;
     height: auto;
-    margin-bottom: 2rem;
     z-index: auto;
     opacity: 1;
     transition: opacity 0.3s ease;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
 
     &.hidden {
         visibility: hidden;
         opacity: 0;
-    }
-
-    @media (min-width: $breakpoint-md) {
-        display: flex;
-        align-items: center;
-
-        .keen-slider__slide {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .carousel-image {
-            height: 650px;
-            width: auto;
-            max-width: 100%;
-            object-fit: cover;
-            display: block;
-        }
     }
 
     &--full-screen-mobile {
@@ -54,52 +32,97 @@
             }
         }
     }
+
+    @media (min-width: $breakpoint-md) {
+        display: flex;
+        align-items: center;
+
+        .keen-slider__slide {
+            display: flex;
+            justify-content: center;
+        }
+
+        .carousel-image {
+            height: 40.625rem;
+            width: auto;
+            max-width: 100%;
+        }
+    }
+}
+
+.keen-slider__slide {
+    width: 100%;
+
+    @media (max-width: $breakpoint-md) {
+        overflow: hidden;
+        height: 500px;
+    }
 }
 
 .carousel-image {
     width: 100%;
     height: auto;
-    object-fit: cover;
     display: block;
-}
+    object-fit: cover;
 
-.keen-slider__slide {
-    width: 100%;
+    @media (max-width: $breakpoint-md) {
+        height: 500px;
+    }
 }
 
 .carousel-pagination {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: .8rem;
     gap: 1rem;
+    padding: 0 1.5rem;
+    max-width: 78rem;
 
-    button.arrow {
-        background: none;
-        border: none;
-        font-size: 2rem;
-        cursor: pointer;
-        color: #333;
-        padding: 0 0.5rem;
-        user-select: none;
-    }
-
-    .dots {
-        display: flex;
-        gap: 0.5rem;
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ccc;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-
-            &.active {
-                background: #333;
-            }
+    @media (min-width: $breakpoint-md) {
+        padding: 0;
         }
+
+    .slide-description {
+        font-size: .75rem;
+
     }
+
+    .pagination-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        button.arrow {
+                background: none;
+                border: none;
+                font-size: 2rem;
+                cursor: pointer;
+                color: #333;
+                user-select: none;
+                margin-left: -.5rem; 
+                margin-right: -.5rem;
+            }
+        
+            .dots {
+                display: flex;
+                gap: 0.5rem;
+                padding: 0 1rem;
+        
+                .dot {
+                    width: 0.4rem;
+                    height: 0.4rem;
+                    border-radius: 50%;
+                    background: #ccc;
+                    border: none;
+                    cursor: pointer;
+                    padding: 0;
+        
+                    &.active {
+                        background: $grey;
+                    }
+                }   }
+    }
+
+
 }
