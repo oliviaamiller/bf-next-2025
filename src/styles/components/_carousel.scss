@@ -73,11 +73,11 @@
 .carousel-pagination {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    margin-top: .8rem;
-    gap: 1rem;
+    align-items: flex-end; 
+    margin: auto; 
     padding: 0 1.5rem;
-    max-width: 78rem;
+    max-width: 850px;
+    width: 100%; 
 
     @media (min-width: $breakpoint-md) {
         padding: 0;
@@ -85,6 +85,7 @@
 
     .slide-description {
         font-size: .75rem;
+        padding-top: 14px;
 
     }
 
@@ -92,6 +93,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        padding-top: 1rem;
 
         button.arrow {
                 background: none;

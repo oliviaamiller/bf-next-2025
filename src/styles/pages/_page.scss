@@ -13,7 +13,6 @@ section {
     width: 100%
 ;
 
-// these are my desktop styles below
     @media (min-width: $breakpoint-md) { 
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(212px, 1fr));
@@ -77,5 +76,13 @@ section {
         margin-bottom: 1rem;
         content: "";
     }
+
+}
+
+.generic-page {
+    max-width: 850px;
+    margin: auto;
+    padding: 0 1rem;
+
 
 }

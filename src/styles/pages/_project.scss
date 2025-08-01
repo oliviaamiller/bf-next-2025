@@ -1,5 +1,10 @@
 @use 'variables' as *;
 
+section {
+    display: flex;
+    flex-direction: column;
+}
+
 .project-wrapper {
     position: relative;
 
@@ -9,15 +14,19 @@
         margin-left: auto;
         margin-right: auto;
     }
-
-
     .name  {
         font-weight: 700;
+        margin-top: -14px;
     }
 
     .project-copy {
         padding: 1rem 1.5rem;
-        max-width: 62.5rem;
+        max-width: 850px;
+        margin-top: -24px;
+    }
+
+    .rich-text p:first-child {
+        margin-top: -14px;
     }
 
 @media (min-width: $breakpoint-md) { 
@@ -26,6 +35,7 @@
         align-items: center;
 
         .project-copy {
-                padding: 1rem 0;   }
-}
+                padding: 1rem 0;
+        }
+    }
 }
