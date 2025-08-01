@@ -34,30 +34,32 @@ export default async function SlugPage(props) {
     const projects = category.fields.projects || [];
 
     return (
-      <section className="category-gallery">
-        {projects.map((project, index) => {
-          const thumb = project.fields.thumbnail?.fields?.file?.url;
-          const name = project.fields.name;
-          const projectSlug = safeSlug(project.fields.slug);
+      <section>
+        <div className="category-gallery">
+          {projects.map((project, index) => {
+            const thumb = project.fields.thumbnail?.fields?.file?.url;
+            const name = project.fields.name;
+            const projectSlug = safeSlug(project.fields.slug);
 
-          return (
-            <div className="project-thumbnail" key={index}>
-              <Link href={`/${slug}/${projectSlug}`}>
-                {thumb && (
-                  <img
-                    src={`https:${thumb}`}
-                    alt={name}
-                    width={288}
-                    height={288}
-                  />
-                )}
-                <div className="project-overlay">
-                  <p>{name}</p>
-                </div>
-              </Link>
-            </div>
-          );
-        })}
+            return (
+              <div className="project-thumbnail" key={index}>
+                <Link href={`/${slug}/${projectSlug}`}>
+                  {thumb && (
+                    <img
+                      src={`https:${thumb}`}
+                      alt={name}
+                      width={288}
+                      height={288}
+                    />
+                  )}
+                  <div className="project-overlay">
+                    <p>{name}</p>
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </section>
     );
   }

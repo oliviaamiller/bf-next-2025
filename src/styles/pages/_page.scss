@@ -1,16 +1,25 @@
 @use 'variables' as *;
 
+section {
+    display: flex;
+    justify-content: center;
+}
+
 .category-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(50%, 288px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(50%, 212px), 1fr));
     gap: 0;
     justify-content: center;
+    width: 100%
+;
 
+// these are my desktop styles below
     @media (min-width: $breakpoint-md) { 
         display: grid;
-        grid-template-columns: repeat(auto-fill, 288px);
+        grid-template-columns: repeat(auto-fit, minmax(212px, 1fr));
         gap: 0;
         justify-content: center;
+        max-width: 850px
     }
 
     p {
